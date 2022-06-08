@@ -1,0 +1,16 @@
+.plus{
+    cursor: pointer;
+    color: grey;
+    width: 40px;
+}
+
+.plusLine{
+    cursor: pointer;
+    opacity: 0.2;
+    height: 40px;
+
+}
+
+.plusLine:hover{
+    opacity: 1;
+}
