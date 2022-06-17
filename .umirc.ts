@@ -8,6 +8,7 @@ export default defineConfig({
     { path: '/', component: '@/pages/index' },
     { path: '/schedule', component: '@/pages/schedule/index'},
     { path: '/team', component: '@/pages/teams/index'},
+    { path: '/first-team', component: '@/pages/firstTeam/index'},
   ],
   fastRefresh: {},
   mfsu: {},

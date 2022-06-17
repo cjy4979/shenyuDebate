@@ -1,18 +1,57 @@
-.contents{
+.contents {
   display: -webkit-flex;
   /* Safari */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   width: 100%;
+  min-height: 100vh;
+}
+
+/* 选择器*/
+.dragArea {
+  border: 2px dashed #595959;
+  height: 35vh;
+  min-width: 40%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.dragArea:hover{
+  border: 2px solid #595959;
+  background-color: #bae7ff;
 }
 
 
+.uploadHeader{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.inputItem {
+  padding: 10px 20px;
+  margin-top:5px;
+  width: 100px;
+  font-size: 14px;
+  background-color: #f0f5ff;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #69c0ff;
+  outline: none;
+  cursor: pointer;
+}
+
+
+/*展示框*/
+
 .main {
-  align-items:center;
+  align-items: center;
   min-height: 800px;
-  background-color: antiquewhite;
+  background-color: #edeadcdd;
   border-radius: 15px;
   margin: 5px auto;
 }
@@ -26,15 +65,70 @@ input {
 
 }
 
-.teamRow{
+/*队伍名称行*/
+.teamRow {
   width: 100%;
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.teamName{
+  margin-left: 40%;
+}
+
+.showTeamName{
+  margin-left: 20%;
+}
+
+/*确认按钮*/
+
+.buttonDiv{
+  
   display: -webkit-flex;
   /* Safari */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
+
+.button{
+  padding: 3px 3px;
+  width: 96px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #d9f7be;
+  border: 1px solid #7d7d7db8;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.buttonDiv1 :hover{
+  background-color: #bae637;
+  color: white;
+}
+
+.button2{
+  padding: 3px 3px;
+  width: 96px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #ffccc7;
+  border: 1px solid #7d7d7db8;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.buttonDiv2 :hover{
+  background-color: #ff4d4f;
+  color: white;
+}
+
 
 
 .leaderRow {
@@ -43,7 +137,7 @@ input {
   display: flex;
   justify-content: center;
   font-size: large;
-  align-items:center;
+  align-items: center;
   flex: 1;
 }
 
@@ -54,7 +148,7 @@ input {
   display: flex;
   justify-content: space-around;
   font-size: large;
-  align-items:center;
+  align-items: center;
   flex: 1;
 }
 
@@ -65,76 +159,69 @@ input {
   margin-top: 10px;
   margin-left: 1%;
   font-family: '宋体';
-  color:grey;
+  color: grey;
   justify-content: flex-start;
   font-weight: 600;
 }
 
-table{
+table {
   min-width: 100%;
 }
 
-.member{
+.member {
   min-width: 94%;
   margin-top: 15px;
   margin-left: 3%;
   margin-right: 3%;
 }
 
-tr{
+tr {
   border-bottom: 1px solid grey;
 }
 
-.tr{
+.tr {
   height: 80px;
 }
 
-tbody{
+tbody {
   border: 1px solid grey;
   font-size: 14px;
 }
 
-td{
+td {
   text-align: center;
   margin-top: 10px;
-  div{
+
+  div {
     margin: auto;
   }
 }
 
-.name{
+.name {
   width: 6%;
   text-align: center;
 }
 
-.debate{
+.debate {
   width: 40%;
   text-align: center;
   align-content: center;
 }
 
-.theme{
+.theme {
   width: 30%;
   text-align: center;
   align-content: center;
 }
 
-.debate1,.theme1{
+.debate1,
+.theme1 {
   text-align: center;
   align-content: center;
 }
 
 
-.topicTitle{
+.topicTitle {
   width: 10%;
 }
 
-button{
-  display: -webkit-flex;
-  /* Safari */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
-  width: 100%;
-}
