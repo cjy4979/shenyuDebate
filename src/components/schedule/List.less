@@ -1,9 +1,18 @@
 .main {
-  height: 200px;
+  min-height: 220px;
   background-color: antiquewhite;
+  //background-image:url('../../images/catprint.png');
+	background-repeat:x-repeat;
+  background-size:contain;
   border-radius: 15px;
-  width: 80%;
-  margin-left: 10%;
+  box-shadow: 2px 3px 1px #9f9d9d;
+  margin: auto;
+  margin-top: 16px;
+  flex: 0 0 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 input {
@@ -11,27 +20,59 @@ input {
   
 }
 
-
+//行
 .firstRow {
-  margin-top: 5px;
-  height: 30px;
-  border-bottom: 1px solid red;
-  line-height: 18px;
+  margin-top: 6px;
+  margin-bottom: 5px;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+  display: flex;
+  flex-wrap:no-wrap;
+  justify-content: space-between;
 }
 
+//正反方
+.z,.f{
+  width: 40%;
+}
+
+//正反方辩题
 .topicZ,
 .topicF {
-  width: 40%;
+  width: 47%;
   text-align: center;
   background-color: none;
 }
 
+//辩题
 .topic {
   width: 40%;
   text-align: center;
   background-color: none;
 }
 
-.judge4{
-  width: 20%;
+//评委
+.judge1,.judge2,.judge3{
+  width: 30%;
+}
+
+//猫猫开关
+.icon{
+  cursor: pointer;
+}
+
+//工作人员显示
+.work{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+a{
+  width: 95%;
+  word-break: break-all;
+  word-wrap: break-word;
 }

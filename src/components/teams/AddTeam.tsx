@@ -112,7 +112,7 @@ export default class AddTeam extends Component<any, any> {
 
     //获取报名表信息
 
-    onReselect = () =>{
+    onReselect = () => {
         this.setState(
             {
                 team: '',
@@ -156,8 +156,6 @@ export default class AddTeam extends Component<any, any> {
     //提交报名表信息
     onClick = () => {
         var data = this.state
-        delete data['status']
-
         fetch('http://localhost/api/addteam', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -243,7 +241,7 @@ export default class AddTeam extends Component<any, any> {
                     <div>
                         <div className={styles.main}>
                             <h1 className={styles.teamRow}>
-                                <input id='team' className={styles.teamName} readOnly defaultValue={this.state.team} />
+                                <input id='team' className={styles.teamName} readOnly value={this.state.team} />
                                 <div className={styles.buttonDiv1} >
                                     <button className={styles.button} onClick={() => this.onClick()}>
                                         确认并提交
@@ -257,25 +255,25 @@ export default class AddTeam extends Component<any, any> {
                             </h1>
 
                             <div className={styles.leaderRow}>
-                                <div>
+                                <div style={{ minWidth: '50px',marginLeft:'20px ' }}>
                                     领队:
                                 </div>
-                                <input id='leader' 
-                                readOnly 
-                                style={this.state.leader === ''?{color:'red'}:{color:''}} 
-                                defaultValue={this.state.leader===''?'请检查表格':this.state.leader} />
-                                <div>
+                                <input id='leader'
+                                    readOnly
+                                    style={this.state.leader === '' ? { color: 'red' } : { color: '' }}
+                                    value={this.state.leader === '' ? '请检查表格' : this.state.leader} />
+                                <div style={{ minWidth: '50px' }}>
                                     手机:
                                 </div>
-                                <input id='phone' readOnly defaultValue={this.state.phone} />
-                                <div>
+                                <input id='phone' readOnly value={this.state.phone} />
+                                <div style={{ minWidth: '50px' }}>
                                     微信:
-                                </div>
-                                <input id='wechat' readOnly defaultValue={this.state.wechat} />
+                                </div >
+                                <input id='wechat' readOnly value={this.state.wechat} />
                                 <div>
                                     QQ:
                                 </div>
-                                <input id='QQ' readOnly defaultValue={this.state.QQ} />
+                                <input id='QQ' readOnly value={this.state.QQ} />
                             </div>
 
                             {/* 成员展示列表 */}
@@ -304,7 +302,7 @@ export default class AddTeam extends Component<any, any> {
                                             </td>
                                             <td>
                                                 <div style={this.state.debate1 === '3-5条' ? { color: 'red' } : { color: '' }}>
-                                                    {this.state.debate1 === '3-5条' ?'请检查表格':this.state.member1}
+                                                    {this.state.debate1 === '3-5条' ? '请检查表格' : this.state.member1}
                                                 </div>
                                             </td>
                                             <td>
@@ -482,7 +480,7 @@ export default class AddTeam extends Component<any, any> {
                             </div>
 
 
-                            {
+                            {/* {
                                 this.state.topic1 === '' ?
                                     <h1>
                                         无
@@ -534,7 +532,7 @@ export default class AddTeam extends Component<any, any> {
                                             </tbody>
                                         </table>
                                     </div>
-                            }
+                            } */}
 
 
 
