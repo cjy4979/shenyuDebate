@@ -74,8 +74,8 @@ export default class Header extends Component<any, any> {
                                 history.push('/team')
                             }}
                         />
-                        <Nav.Item itemKey="personnel" text="赛事列表"
-                            style={this.state.rights !== '1' ? { display: 'none' } : {}}
+                        <Nav.Item itemKey="personnel" text="对阵双方"
+                            style={this.state.rights === '0' ? { display: 'none' } : {}}
                             icon={<IconUserGroup size="large" />}
                             onClick={() => {
                                 this.setState({ selectedKeys: ['personnel'] })

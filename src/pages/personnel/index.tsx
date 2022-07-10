@@ -16,7 +16,7 @@ export default function index() {
     const [page,setPge]=useState(1)
     const [total,setTotal]=useState()
     useEffect(() => {
-        if (getCookie('rights') !== '1') {
+        if (getCookie('rights') === '0') {
             Toast.warning('无权限')
             history.push('./statistics')
           } else {

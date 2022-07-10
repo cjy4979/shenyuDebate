@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './questionnaire.less';
-import onlineLogo from '../../../images/online.png'
+import onlineLogo from '@/images/online.png'
 import Ques from '@/components/Ques/Ques'
 
 export default function questionnaire() {

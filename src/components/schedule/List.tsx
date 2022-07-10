@@ -6,6 +6,7 @@ import moment from "moment";
 import { Card } from 'antd'
 import { range } from 'lodash-es';
 import { IconCopy } from '@douyinfe/semi-icons';
+import { getCookie, removeCookie } from '@/utils/auth';
 const { Text } = Typography;
 
 
@@ -34,9 +35,12 @@ export default class List extends Component<any, any>  {
     //以上为数据，一下为前台处理所用缓存
     check: true, //防误删开关,true为不可修改
     url0: '',
-    teams: [{}],
-    changeId: ''
+    teams: [{}], //队伍选项
+    changeId: '',//正反方select选择器的id
+    rights: getCookie('rights'),
+    urlOpen: false, //计时器链接框
   }
+
 
   //组件挂载获取队名
   componentWillMount() {
@@ -220,11 +224,14 @@ export default class List extends Component<any, any>  {
 
   //防误触
   onCheckClick = () => {
-    this.state.check === true ? this.setState({ check: false }) : this.setState({ check: true })
+    if (this.state.rights === '1') {
+      this.state.check === true ? this.setState({ check: false }) : this.setState({ check: true })
+    }
   }
 
   //计时码生成
   buildCode = () => {
+    this.setState({ urlOpen: !this.state.urlOpen })
     var url0 = "https://new.bianlun.online/#/show?rid=9&nub=false&useb=true&off=false&ringBellTime=30&isDisplayTitle=true&custom=true&water=false&colorCode=%23e0ffff%7C%23ffffff%7C%2328769b%7C%23ffffff%7C%23ffffff%7C%23BF2727%7C%23007A9C" +
       "&n0=" + encodeURI(this.state.z) +
       "&n1=" + encodeURI(this.state.f) +
@@ -442,6 +449,10 @@ export default class List extends Component<any, any>  {
       '六',
     ]
 
+    //Input展示的时间格式
+    var time = moment(this.state.time).format('M月D日 HH:mm')
+    var endtime = moment(this.state.endtime).format('M月D日 HH:mm')
+
     return (
       <div className={styles.main}
         style={this.state.schedule.substr(0, 2) === '决赛' ? { backgroundColor: '	#FAFAD2' } :
@@ -452,7 +463,7 @@ export default class List extends Component<any, any>  {
         {/*第一行，放场次信息、会议号 */}
         <div className={styles.firstRow}>
           <Input className={styles.meeting} id='schedule'
-            addonBefore="场次:"
+            insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>场次</span>}
             readonly
             value={this.state.schedule.replace(/\,/g, '-')}
             style={{ width: 210 }} />
@@ -491,7 +502,7 @@ export default class List extends Component<any, any>  {
 
 
           <Input className={styles.meeting} id='meeting'
-            addonBefore="会议号："
+            insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>会议号</span>}
             readonly={this.state.check}
             value={this.state.meeting}
             style={{ width: 210 }}
@@ -499,47 +510,70 @@ export default class List extends Component<any, any>  {
         </div>
 
         {/*第二行，放时间信息 */}
-        <div className={styles.firstRow}>
-          <DatePicker type="dateTime"
-            value={this.state.time}
-            style={{ width: 210, marginRight: '5%' }}
-            timePickerOpts={{
-              scrollItemProps: { cycled: false },
-            }}
-            needConfirm={true}
-            disabledTime={this.disabledTime}
-            onConfirm={(...args) => this.dataConfirm(...args)}
-            onCancel={(...args) => {
-              console.log('Canceled: ', ...args);
-            }}
-          ></DatePicker>
+        {this.state.rights === '1' && this.state.check === false ?
+          <div className={styles.firstRow}>
+            <DatePicker type="dateTime"
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>时间</span>}
+              value={this.state.time}
+              style={{ width: 210, marginRight: '5%' }}
+              timePickerOpts={{
+                scrollItemProps: { cycled: false },
+              }}
+              needConfirm={true}
+              disabledTime={this.disabledTime}
+              onConfirm={(...args) => this.dataConfirm(...args)}
+              onCancel={(...args) => {
+                console.log('Canceled: ', ...args);
+              }}
+            ></DatePicker>
 
-          <Input className={styles.meeting} id='schedule'
-            readonly
-            value={this.state.time === null ? '' : '周' + a[moment(this.state.time).day()]}
-            style={{ width: 60 }} />
+            <Input className={styles.meeting} id='schedule'
+              readonly
+              value={this.state.time === null ? '' : '周' + a[moment(this.state.time).day()]}
+              style={{ width: 60 }} />
 
-          <DatePicker type="dateTime"
-            value={this.state.endtime}
-            style={{ width: 210, marginLeft: '5%' }}
-            timePickerOpts={{
-              scrollItemProps: { cycled: false },
-            }}
-            needConfirm={true}
-            disabledTime={this.disabledTime}
-            onConfirm={(...args) => this.dataConfirmEnd(...args)}
-            onCancel={(...args) => {
-              console.log('Canceled: ', ...args);
-            }}
-          ></DatePicker>
-        </div>
+            <DatePicker type="dateTime"
+              value={this.state.endtime}
+              style={{ width: 210, marginLeft: '5%' }}
+              timePickerOpts={{
+                scrollItemProps: { cycled: false },
+              }}
+              needConfirm={true}
+              disabledTime={this.disabledTime}
+              onConfirm={(...args) => this.dataConfirmEnd(...args)}
+              onCancel={(...args) => {
+                console.log('Canceled: ', ...args);
+              }}
+            ></DatePicker>
+          </div>
+          :
+          //非管理员不得更改
+          <div className={styles.firstRow}>
+            <Input 
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>时间</span>}
+              value={time}
+              style={{ width: 210, marginRight: '5%' }}
+              readonly
+            ></Input>
 
+            <Input className={styles.meeting} id='schedule'
+              readonly
+              value={this.state.time === null ? '' : '周' + a[moment(this.state.time).day()]}
+              style={{ width: 60 }} />
+
+            <Input type="dateTime"
+              value={endtime}
+              style={{ width: 210, marginLeft: '5%' }}
+              readonly
+            ></Input>
+          </div>
+        }
 
         {/*第三行，放辩题信息 */}
         <div className={styles.firstRow}>
           <Input className={styles.topic} id='topic'
             readonly={this.state.check}
-            addonBefore="辩题:"
+            insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>辩题</span>}
             style={{ fontSize: '24px', width: '100%' }}
             placeholder='请填写'
             value={this.state.topic}
@@ -547,27 +581,48 @@ export default class List extends Component<any, any>  {
         </div>
 
         {/*第四行，放正反方信息 */}
-        <div className={styles.firstRow}>
-          <Select placeholder='请选择' id='z'
-          insetLabel={<span style={{marginLeft: 5, color: "var(--semi-color-text-2)" }}>正方</span>}
-            style={{ width: '44%' }}
-            value={this.state.z}
-            optionList={this.state.teams}
-            onChange={(e) => this.onChange(e)}
-            onFocus={() => this.setState({ changeId: 'z'})}
-          ></Select>
+        {this.state.rights === '1' && this.state.check === false ?
+          <div className={styles.firstRow}>
+            <Select placeholder='请选择' id='z'
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>正方</span>}
+              style={{ width: '44%' }}
+              value={this.state.z}
+              optionList={this.state.teams}
+              onChange={(e) => this.onChange(e)}
+              onFocus={() => this.setState({ changeId: 'z' })}
+            ></Select>
 
-          <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8042" id="mx_n_1657097586450" data-spm-anchor-id="a313x.7781069.0.i25" width="36" height="36"><path d="M448 608L608 192h384l-64 160h-192l-64 128h192l-192 416h-320l64-160H576l64-128H448z" fill="#F8B304" p-id="8043"></path><path d="M672 928h-320c-12.8 0-19.2-6.4-25.6-12.8-6.4-12.8-6.4-19.2-6.4-32l64-160c6.4-12.8 19.2-19.2 32-19.2h140.8l32-64H448c-12.8 0-19.2-6.4-25.6-12.8s-6.4-19.2-6.4-32L576 179.2c6.4-12.8 19.2-19.2 32-19.2h384c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 6.4 32l-64 160c-6.4 12.8-19.2 19.2-32 19.2h-172.8l-32 64h140.8c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 0 32l-192 416c0 12.8-12.8 19.2-25.6 19.2z m-275.2-64h249.6L812.8 512h-140.8c-12.8 0-19.2-6.4-25.6-12.8-6.4-6.4-6.4-19.2 0-32l64-128c0-12.8 12.8-19.2 25.6-19.2h172.8l38.4-96h-320L492.8 576H640c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-64 128c0 12.8-12.8 19.2-25.6 19.2H435.2l-38.4 96z" p-id="8044"></path><path d="M256 192H64l230.4 556.8c19.2 51.2 96 51.2 121.6 0L640 192H448L352 480 256 192z" fill="#AECFFF" p-id="8045"></path><path d="M352 825.6c-38.4 0-76.8-25.6-89.6-57.6L32 204.8c-6.4-12.8 0-19.2 0-32 12.8-6.4 19.2-12.8 32-12.8h192c12.8 0 25.6 6.4 32 19.2l64 198.4 64-198.4c6.4-12.8 19.2-19.2 32-19.2h192c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-230.4 556.8c-6.4 38.4-44.8 64-83.2 64zM108.8 224l211.2 512c6.4 19.2 25.6 19.2 32 19.2s19.2 0 32-19.2l211.2-512H473.6L384 492.8c-12.8 25.6-51.2 25.6-64 0L230.4 224H108.8z" p-id="8046"></path></svg>
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8042" id="mx_n_1657097586450" data-spm-anchor-id="a313x.7781069.0.i25" width="36" height="36"><path d="M448 608L608 192h384l-64 160h-192l-64 128h192l-192 416h-320l64-160H576l64-128H448z" fill="#F8B304" p-id="8043"></path><path d="M672 928h-320c-12.8 0-19.2-6.4-25.6-12.8-6.4-12.8-6.4-19.2-6.4-32l64-160c6.4-12.8 19.2-19.2 32-19.2h140.8l32-64H448c-12.8 0-19.2-6.4-25.6-12.8s-6.4-19.2-6.4-32L576 179.2c6.4-12.8 19.2-19.2 32-19.2h384c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 6.4 32l-64 160c-6.4 12.8-19.2 19.2-32 19.2h-172.8l-32 64h140.8c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 0 32l-192 416c0 12.8-12.8 19.2-25.6 19.2z m-275.2-64h249.6L812.8 512h-140.8c-12.8 0-19.2-6.4-25.6-12.8-6.4-6.4-6.4-19.2 0-32l64-128c0-12.8 12.8-19.2 25.6-19.2h172.8l38.4-96h-320L492.8 576H640c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-64 128c0 12.8-12.8 19.2-25.6 19.2H435.2l-38.4 96z" p-id="8044"></path><path d="M256 192H64l230.4 556.8c19.2 51.2 96 51.2 121.6 0L640 192H448L352 480 256 192z" fill="#AECFFF" p-id="8045"></path><path d="M352 825.6c-38.4 0-76.8-25.6-89.6-57.6L32 204.8c-6.4-12.8 0-19.2 0-32 12.8-6.4 19.2-12.8 32-12.8h192c12.8 0 25.6 6.4 32 19.2l64 198.4 64-198.4c6.4-12.8 19.2-19.2 32-19.2h192c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-230.4 556.8c-6.4 38.4-44.8 64-83.2 64zM108.8 224l211.2 512c6.4 19.2 25.6 19.2 32 19.2s19.2 0 32-19.2l211.2-512H473.6L384 492.8c-12.8 25.6-51.2 25.6-64 0L230.4 224H108.8z" p-id="8046"></path></svg>
 
-          <Select placeholder='请选择' id='f'
-          insetLabel={<span style={{marginLeft: 5, color: "var(--semi-color-text-2)" }}>反方</span>}
-            style={{ width: '44%' }}
-            value={this.state.f}
-            optionList={this.state.teams}
-            onChange={(e) => this.onChange(e)}
-            onFocus={() => this.setState({ changeId:'f' })}
-          ></Select>
-        </div>
+            <Select placeholder='请选择' id='f'
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>反方</span>}
+              style={{ width: '44%' }}
+              value={this.state.f}
+              optionList={this.state.teams}
+              onChange={(e) => this.onChange(e)}
+              onFocus={() => this.setState({ changeId: 'f' })}
+            ></Select>
+          </div>
+          :
+          <div className={styles.firstRow}>
+            <Input placeholder='请选择' id='z'
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>正方</span>}
+              style={{ width: '44%' }}
+              readonly
+              value={this.state.z}
+            ></Input>
+
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8042" id="mx_n_1657097586450" data-spm-anchor-id="a313x.7781069.0.i25" width="36" height="36"><path d="M448 608L608 192h384l-64 160h-192l-64 128h192l-192 416h-320l64-160H576l64-128H448z" fill="#F8B304" p-id="8043"></path><path d="M672 928h-320c-12.8 0-19.2-6.4-25.6-12.8-6.4-12.8-6.4-19.2-6.4-32l64-160c6.4-12.8 19.2-19.2 32-19.2h140.8l32-64H448c-12.8 0-19.2-6.4-25.6-12.8s-6.4-19.2-6.4-32L576 179.2c6.4-12.8 19.2-19.2 32-19.2h384c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 6.4 32l-64 160c-6.4 12.8-19.2 19.2-32 19.2h-172.8l-32 64h140.8c12.8 0 19.2 6.4 25.6 12.8s6.4 19.2 0 32l-192 416c0 12.8-12.8 19.2-25.6 19.2z m-275.2-64h249.6L812.8 512h-140.8c-12.8 0-19.2-6.4-25.6-12.8-6.4-6.4-6.4-19.2 0-32l64-128c0-12.8 12.8-19.2 25.6-19.2h172.8l38.4-96h-320L492.8 576H640c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-64 128c0 12.8-12.8 19.2-25.6 19.2H435.2l-38.4 96z" p-id="8044"></path><path d="M256 192H64l230.4 556.8c19.2 51.2 96 51.2 121.6 0L640 192H448L352 480 256 192z" fill="#AECFFF" p-id="8045"></path><path d="M352 825.6c-38.4 0-76.8-25.6-89.6-57.6L32 204.8c-6.4-12.8 0-19.2 0-32 12.8-6.4 19.2-12.8 32-12.8h192c12.8 0 25.6 6.4 32 19.2l64 198.4 64-198.4c6.4-12.8 19.2-19.2 32-19.2h192c12.8 0 19.2 6.4 25.6 12.8 6.4 6.4 6.4 19.2 0 32l-230.4 556.8c-6.4 38.4-44.8 64-83.2 64zM108.8 224l211.2 512c6.4 19.2 25.6 19.2 32 19.2s19.2 0 32-19.2l211.2-512H473.6L384 492.8c-12.8 25.6-51.2 25.6-64 0L230.4 224H108.8z" p-id="8046"></path></svg>
+
+            <Input placeholder='请选择' id='f'
+              insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>反方</span>}
+              style={{ width: '44%' }}
+              value={this.state.f}
+              readonly
+            ></Input>
+          </div>
+        }
+
 
         {/*第五行，放评委信息 */}
         <div className={styles.firstRow}>
@@ -600,14 +655,14 @@ export default class List extends Component<any, any>  {
               <div className={styles.firstRow}>
                 <Input className={styles.topicZ} id='topicZ'
                   value={this.state.topicZ}
-                  addonBefore="正方辩题:"
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>正方辩题</span>}
                   placeholder='请填写'
                   readonly={this.state.check}
                   onChange={(e, v) => this.onInputChange(v)} />
 
                 <Input className={styles.topicF} id='topicF'
                   readonly={this.state.check}
-                  addonBefore="反方辩题:"
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>反方辩题</span>}
                   placeholder='请填写'
                   value={this.state.topicF}
                   onChange={(e, v) => this.onInputChange(v)} />
@@ -616,22 +671,22 @@ export default class List extends Component<any, any>  {
               {/* 第七、八行，工作人员信息*/}
               <div className={styles.firstRow}>
                 <Input className={styles.judge1} id='host'
-                  readonly={this.state.check}
-                  addonBefore="主席:"
+
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>主席</span>}
                   placeholder='请填写'
                   value={this.state.host}
                   onChange={(e, v) => this.onInputChange(v)} />
 
                 <Input className={styles.judge2} id='timer'
-                  readonly={this.state.check}
-                  addonBefore="计时:"
+
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>计时</span>}
                   placeholder='请填写'
                   value={this.state.timer}
                   onChange={(e, v) => this.onInputChange(v)} />
 
                 <Input className={styles.judge3} id='control'
-                  readonly={this.state.check}
-                  addonBefore="场控:"
+
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>场控</span>}
                   placeholder='请填写'
                   value={this.state.control}
                   onChange={(e, v) => this.onInputChange(v)} />
@@ -640,8 +695,8 @@ export default class List extends Component<any, any>  {
               {/* 第七、八行，工作人员信息*/}
               <div className={styles.firstRow}>
                 <Input className={styles.judge1} id='teamContact'
-                  readonly={this.state.check}
-                  addonBefore="队伍负责:"
+
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>队伍负责</span>}
                   placeholder='请填写'
                   value={this.state.teamContact}
                   onChange={(e, v) => this.onInputChange(v)} />
@@ -652,15 +707,15 @@ export default class List extends Component<any, any>  {
                 >生成计时链接</Button>
 
                 <Input className={styles.judge2} id='judgeContact'
-                  readonly={this.state.check}
-                  addonBefore="评委负责:"
+
+                  insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>评委负责</span>}
                   placeholder='请填写'
                   value={this.state.judgeContact}
                   onChange={(e, v) => this.onInputChange(v)} />
               </div>
 
               {
-                this.state.url0 === '' ? '' :
+                this.state.urlOpen ?
                   <div className={styles.firstRow}>
                     <Card title="点击右侧复制，点击链接跳转" extra={
                       <IconCopy
@@ -672,6 +727,7 @@ export default class List extends Component<any, any>  {
                       <a id="url" href={this.state.url0} target='_blank'>{this.state.url0}</a>
                     </Card>
                   </div>
+                  : ''
               }
             </div>
             : ''
