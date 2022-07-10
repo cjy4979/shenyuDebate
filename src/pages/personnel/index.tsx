@@ -21,7 +21,7 @@ export default function index() {
             history.push('./statistics')
           } else {
         setPge(1)
-        fetch('http://localhost:80/api/schedule?type=' + type+'&page='+page+'&size=8').then(
+        fetch('/api/schedule?type=' + type+'&page='+page+'&size=8').then(
             response => response.json()
         ).then(
             data => {
@@ -38,7 +38,7 @@ export default function index() {
     const onClickType = (data: any) => {
         setType([data.itemKey])
         setPge(1)
-        fetch('http://localhost/api/schedule?type=' + data.itemKey+'&page=1&size=8').then(
+        fetch('/api/schedule?type=' + data.itemKey+'&page=1&size=8').then(
             response => response.json()
         ).then(
             data => {
@@ -50,7 +50,7 @@ export default function index() {
 
     const onChange =(e:number) =>{
         setPge(e)
-        fetch('http://localhost/api/schedule?type=' + type+'&page='+e+'&size=8').then(
+        fetch('/api/schedule?type=' + type+'&page='+e+'&size=8').then(
             response => response.json()
         ).then(
             data => {

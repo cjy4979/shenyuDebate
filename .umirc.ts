@@ -4,15 +4,15 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  favicon:'@/images/favicon.ico',
+  favicon:'./src/images/favicon.ico',
   proxy: {
     '/api': {
-      'target': 'http://localhost:8080/',
+      'target': 'http://localhost:8005/',
       'pathRewrite': { '^/api' : '/api' },
     },
   },
   routes: [
-    { path: '/', component: '@/pages/index',titel:'深语10.0 萌宠主题辩论赛'},
+    { path: '/', component: '@/pages/index',titel:'深语10.0 萌宠主题辩论赛',},
     { path: '/login', component: '@/pages/Login/Login.tsx',titel:'登录'},
     { path: '/schedule', component: '@/pages/schedule/index',title:'深语10.0 赛程安排',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/team', component: '@/pages/teams/index',title:'深语10.0 队伍筛选',wrappers: ['@/pages/wrappers/auth.tsx']},

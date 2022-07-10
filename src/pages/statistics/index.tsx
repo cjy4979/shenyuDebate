@@ -12,7 +12,7 @@ export default function index() {
 
     //首次挂载加载数据
     useEffect(() => {
-        fetch('http://localhost:80/api/statistics?type=' + type).then(
+        fetch('/api/statistics?type=' + type).then(
                 response => response.json()
             ).then(
                 data => {
@@ -27,7 +27,7 @@ export default function index() {
     // //每30秒刷新
     // useEffect(() => {
     //     const interval = setInterval(() => {
-    //         fetch('http://localhost:80/api/statistics?type=' + type).then(
+    //         fetch('/api/statistics?type=' + type).then(
     //             response => response.json()
     //         ).then(
     //             data => {

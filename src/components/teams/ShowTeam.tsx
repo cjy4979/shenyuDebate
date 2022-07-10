@@ -12,7 +12,7 @@ export default class ShowTeam extends Component<any, any> {
     Delete = () => {
         var msg = confirm('确认删除吗？')
         if (msg === true) {
-            fetch('http://localhost/api/deleteteam?team=' + this.props.team).then(
+            fetch('/api/deleteteam?team=' + this.props.team).then(
                 response => response.json()
             ).then(
                 data => {
@@ -29,7 +29,7 @@ export default class ShowTeam extends Component<any, any> {
         this.setState({
             selected: e.target.value
         })
-        fetch('http://localhost/api/teamselect?team=' + this.props.team + '&selected=' + e.target.value).then(
+        fetch('/api/teamselect?team=' + this.props.team + '&selected=' + e.target.value).then(
             response => response.json()
         ).then(
             data => {
@@ -44,7 +44,7 @@ export default class ShowTeam extends Component<any, any> {
 
     //更新队伍编号
     onCodeChange = (e: any) => {
-        fetch('http://localhost/api/teamcode?type=' + e + '&team=' + this.props.team).then(
+        fetch('/api/teamcode?type=' + e + '&team=' + this.props.team).then(
             response => response.json()
         ).then(
             data => {
@@ -54,7 +54,7 @@ export default class ShowTeam extends Component<any, any> {
                     Toast.error('出错了')
                 } else {
                     if (confirm(data.data)) { //if语句内部判断确认框
-                        fetch('http://localhost/api/teamcodeforce?type=' + e + '&team=' + this.props.team).then(
+                        fetch('/api/teamcodeforce?type=' + e + '&team=' + this.props.team).then(
                             response => response.json()
                         ).then(
                             data => {
@@ -131,7 +131,7 @@ export default class ShowTeam extends Component<any, any> {
                                 {this.props.team}
                             </div>
                             <div>
-                                <RadioGroup onChange={(e) => this.onChange(e)} defaultValue={this.props.selected} name="demo-radio-group">
+                                <RadioGroup onChange={(e) => this.onChange(e)} value={this.props.selected} name="demo-radio-group">
                                     <Radio value={0} style={{ display: 'none' }}>未筛选</Radio>
                                     <Radio value={1}>通过</Radio>
                                     <Radio value={2}>拒绝</Radio>

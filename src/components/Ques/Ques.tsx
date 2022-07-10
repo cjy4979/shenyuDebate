@@ -34,13 +34,13 @@ export default class Ques extends Component {
             message.error("请选择最佳辩手归属")
         } else {
             //备用库提交
-            fetch('http://localhost/api/backsubmit?name=' + this.state.name +
+            fetch('/api/backsubmit?name=' + this.state.name +
                 '&win=' + this.state.NeiRong + '@' + this.state.HuanJie + '@' + this.state.JueSheng +
                 '&best=' + debater
             )
 
             //主库提交
-            fetch('http://localhost/api/submit?name=' + this.state.name +
+            fetch('/api/submit?name=' + this.state.name +
                 '&win=' + this.state.NeiRong + '@' + this.state.HuanJie + '@' + this.state.JueSheng +
                 '&best=' + debater
 

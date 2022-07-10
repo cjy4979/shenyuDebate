@@ -38,7 +38,7 @@ export default function index() {
 
     //useEffect能实时更新，但是会一直向服务器发送请求，antd也会有频闪动画，但是先用着吧
     useEffect(() => {
-        fetch('http://localhost/api/backdate?page=' + currentPage + '&size=10', {
+        fetch('/api/backdate?page=' + currentPage + '&size=10', {
             credentials: 'same-origin',
         }
         ).then(response => response.json())

@@ -15,7 +15,7 @@ export default class Header extends Component<any, any> {
     //登出
     onLogout = () => {
 
-        fetch('http://localhost/api/logout').then(
+        fetch('/api/logout').then(
             response => response.json()
         ).then(
             data => {

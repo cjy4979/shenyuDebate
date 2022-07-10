@@ -34,7 +34,7 @@ export default class PersonnelList extends Component<any, any> {
         var teamZ: { value: any; label: any; }[] = []
         var teamF: { value: any; label: any; }[] = []
         if (this.props.z != null && this.props.z != "") {
-            fetch('http://localhost/api/getmember?team=' + this.props.z.substr(3)).then(
+            fetch('/api/getmember?team=' + this.props.z.substr(3)).then(
                 response => response.json()
             ).then(
                 data => {
@@ -57,7 +57,7 @@ export default class PersonnelList extends Component<any, any> {
         }
 
         if (this.props.f != null && this.props.f != "") {
-            fetch('http://localhost/api/getmember?team=' + this.props.f.substr(3)).then(
+            fetch('/api/getmember?team=' + this.props.f.substr(3)).then(
                 response => response.json()
             ).then(
                 data => {
@@ -94,7 +94,7 @@ export default class PersonnelList extends Component<any, any> {
                 id: this.state.id,
                 [this.state.changeId]: e
             }
-            fetch('http://localhost:80/api/changeschedule', {
+            fetch('/api/changeschedule', {
                 method: 'post',
                 body: JSON.stringify(data),
                 headers: {

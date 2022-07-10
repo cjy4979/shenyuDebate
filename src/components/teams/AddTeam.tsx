@@ -156,7 +156,7 @@ export default class AddTeam extends Component<any, any> {
     //提交报名表信息
     onClick = () => {
         var data = this.state
-        fetch('http://localhost/api/addteam', {
+        fetch('/api/addteam', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

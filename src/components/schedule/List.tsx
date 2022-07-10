@@ -44,7 +44,7 @@ export default class List extends Component<any, any>  {
 
   //组件挂载获取队名
   componentWillMount() {
-    fetch('http://localhost/api/getteamlist?selected=1').then(
+    fetch('/api/getteamlist?selected=1').then(
       response => response.json()
     ).then(
       data => {
@@ -72,7 +72,7 @@ export default class List extends Component<any, any>  {
         id: this.state.id,
         [this.state.changeId]: e
       }
-      fetch('http://localhost:80/api/changeschedule', {
+      fetch('/api/changeschedule', {
         method: 'post',
         body: JSON.stringify(data),
         headers: {
@@ -112,7 +112,7 @@ export default class List extends Component<any, any>  {
         time: this.state.time,
         endtime: this.state.endtime
       }
-      fetch('http://localhost:80/api/changeschedule', {
+      fetch('/api/changeschedule', {
         method: 'post',
         body: JSON.stringify(data),
         headers: {
@@ -138,7 +138,7 @@ export default class List extends Component<any, any>  {
         endtime: this.state.endtime
       }
       console.log(data);
-      fetch('http://localhost:80/api/changeschedule', {
+      fetch('/api/changeschedule', {
         method: 'post',
         body: JSON.stringify(data),
         headers: {
@@ -166,7 +166,7 @@ export default class List extends Component<any, any>  {
         type: this.state.type
       }
 
-      fetch('http://localhost:80/api/changeschedule', {
+      fetch('/api/changeschedule', {
         method: 'post',
         body: JSON.stringify(data),
         headers: {
@@ -192,7 +192,7 @@ export default class List extends Component<any, any>  {
         id: this.state.id,
         [v.target.id]: v.target.value
       }
-      fetch('http://localhost:80/api/changeschedule', {
+      fetch('/api/changeschedule', {
         method: 'post',
         body: JSON.stringify(data),
         headers: {
@@ -211,7 +211,7 @@ export default class List extends Component<any, any>  {
 
 
   Delete = () => {
-    fetch('http://localhost:80/api/deletelist?id=' + this.state.id).then(
+    fetch('/api/deletelist?id=' + this.state.id).then(
       response => response.json()
     ).then(
       data => {

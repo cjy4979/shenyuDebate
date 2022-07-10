@@ -22,23 +22,23 @@ export default function Login(props: { history: string[]; }) {
         }
     },[])
     // 判断浏览器函数
-    function isMobile() {
-        if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
-            props.history.push('/statisitcs');//跳转
-            return true; // 移动端
+    // function isMobile() {
+    //     if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+    //         props.history.push('/statisitcs');//跳转
+    //         return true; // 移动端
             
-        } else {
-            props.history.push('/statistics');//跳转
-            return false; // PC端
+    //     } else {
+    //         props.history.push('/statistics');//跳转
+    //         return false; // PC端
             
-        }
-    }
+    //     }
+    // }
 
     const onFinish = (values: { username: string; password: string; }) => {
         setName(values.username);
         setPassword(values.password);
         if (values) {
-            fetch('http://localhost:80/api/login', {
+            fetch('/api/login', {
                 method: 'post',
                 body: JSON.stringify(values),
                 headers: {
@@ -65,7 +65,7 @@ export default function Login(props: { history: string[]; }) {
                             localStorage.removeItem("username");
                             localStorage.removeItem("password");
                         }
-                       isMobile()
+                        props.history.push('/statistics');//跳转
 
                     }else {
                         message.info('用户名或密码错误');

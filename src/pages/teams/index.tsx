@@ -23,7 +23,7 @@ export default function index() {
       Toast.warning('无权限')
       history.push('./statistics')
     } else {
-      fetch('http://localhost/api/getteamlist?selected=0').then(
+      fetch('/api/getteamlist?selected=0').then(
         response => response.json()
       ).then(
         data => {
@@ -38,7 +38,7 @@ export default function index() {
         }
       )
       //通过的队伍
-      fetch('http://localhost/api/getteamlist?selected=1').then(
+      fetch('/api/getteamlist?selected=1').then(
         response => response.json()
       ).then(
         data => {
@@ -61,7 +61,7 @@ export default function index() {
   //更新数据
   const fresh = () => {
     //未筛选的队伍
-    fetch('http://localhost/api/getteamlist?selected=0').then(
+    fetch('/api/getteamlist?selected=0').then(
       response => response.json()
     ).then(
       data => {
@@ -77,7 +77,7 @@ export default function index() {
     )
 
     //通过的队伍
-    fetch('http://localhost/api/getteamlist?selected=1').then(
+    fetch('/api/getteamlist?selected=1').then(
       response => response.json()
     ).then(
       data => {
@@ -94,7 +94,7 @@ export default function index() {
     )
 
     //拒绝的队伍
-    fetch('http://localhost/api/getteamlist?selected=2').then(
+    fetch('/api/getteamlist?selected=2').then(
       response => response.json()
     ).then(
       data => {
@@ -110,7 +110,7 @@ export default function index() {
     )
 
     //待定的队伍
-    fetch('http://localhost/api/getteamlist?selected=3').then(
+    fetch('/api/getteamlist?selected=3').then(
       response => response.json()
     ).then(
       data => {
@@ -140,7 +140,7 @@ export default function index() {
       }
     } else if (data.itemKey !== 'add') {
       setTeamData([])//增加一步清空数值，应对不知道为什么存在的异步更新
-      fetch('http://localhost/api/getlistbyteam?team=' + data.itemKey).then(
+      fetch('/api/getlistbyteam?team=' + data.itemKey).then(
         response => response.json()
       ).then(
         data => {
