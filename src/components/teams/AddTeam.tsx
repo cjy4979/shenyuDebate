@@ -43,7 +43,7 @@ export default class AddTeam extends Component<any, any> {
         explanation1: '',
         topic2: '', //辩题2
         explanation2: '',
-        status: true
+        status: true //有值隐藏excel选择框
     }
 
 
@@ -104,7 +104,7 @@ export default class AddTeam extends Component<any, any> {
                 explanation2: sheet.D26 ? sheet.D26.v : '',
                 status: false
             }
-            this.setState(data)//或许可以更优雅地更新state而不报错
+            this.setState(data)
         }
         reader.readAsBinaryString(file);
 

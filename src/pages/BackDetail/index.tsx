@@ -14,15 +14,14 @@ export default function index() {
     const [total, setTotal] = useState(0)
 
     //佳辩
-    const bestdebater = [
-        '无佳辩',
-        '正方一辩',
-        '正方二辩',
-        '正方三辩',
-        '反方一辩',
-        '反方二辩',
-        '反方三辩',
-    ]
+    const bestDebater = {
+        'z1': '正方一辩',
+        'z2': '正方二辩',
+        'z3': '正方三辩',
+        'f1': '反方一辩',
+        'f2': '反方二辩',
+        'f3': '反方三辩',
+    }
 
     const colorArr = [
         '',
@@ -105,8 +104,7 @@ export default function index() {
         ellipsis: false,
         align: 'center',
         render: best => {
-            let color = best.substr(0, 1) === 'z' ? colorArr[1] : colorArr[2];
-            let FinalDebater = bestdebater[best.substr(1, 1)];
+            let FinalDebater = bestDebater[best as keyof typeof bestDebater];
             return (
                 <div style={best.substr(0, 1) === 'z' ? { color: '#00b483', fontSize: '18px' } : { color: '#7991d1', fontSize: '18px' }}>
                     {FinalDebater}

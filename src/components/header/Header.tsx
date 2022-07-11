@@ -36,7 +36,7 @@ export default class Header extends Component<any, any> {
     render() {
         const { Header } = Layout;
         return (
-            <Header style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
+            <Header style={{ backgroundColor: 'var(--semi-color-bg-1)',width:'100%' }}>
                 <div>
                     <Nav mode="horizontal" selectedKeys={this.state.selectedKeys}>
                         <Nav.Header>

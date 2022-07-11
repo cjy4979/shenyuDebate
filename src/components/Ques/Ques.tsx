@@ -177,24 +177,24 @@ export default class Ques extends Component {
 
                             <div className={styles.FinalF}>
                                 <div className={styles.FinalDebater}
-                                    onClick={() => { this.setState({ debater: 'f4' }) }}
-                                    style={{ color: this.state.debater === 'f4' ? '#ffb6b9' : '' }}
+                                    onClick={() => { this.setState({ debater: 'f1' }) }}
+                                    style={{ color: this.state.debater === 'f1' ? '#ffb6b9' : '' }}
                                 >
-                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f4' ? 'visible' : 'hidden' }} />
+                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f1' ? 'visible' : 'hidden' }} />
                                     <div className={styles.dName}>反方一辩</div>
                                 </div>
                                 <div className={styles.FinalDebater}
-                                    onClick={() => { this.setState({ debater: 'f5' }) }}
-                                    style={{ color: this.state.debater === 'f5' ? '#ffb6b9' : '' }}
+                                    onClick={() => { this.setState({ debater: 'f2' }) }}
+                                    style={{ color: this.state.debater === 'f2' ? '#ffb6b9' : '' }}
                                 >
-                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f5' ? 'visible' : 'hidden' }} />
+                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f2' ? 'visible' : 'hidden' }} />
                                     <div className={styles.JuesaiName}>反方二辩</div>
                                 </div>
                                 <div className={styles.FinalDebater}
-                                    onClick={() => { this.setState({ debater: 'f6' }) }}
-                                    style={{ color: this.state.debater === 'f6' ? '#ffb6b9' : '' }}
+                                    onClick={() => { this.setState({ debater: 'f3' }) }}
+                                    style={{ color: this.state.debater === 'f3' ? '#ffb6b9' : '' }}
                                 >
-                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f6' ? 'visible' : 'hidden' }} />
+                                    <LikeTwoTone twoToneColor="#ffb6b9" style={{ visibility: this.state.debater === 'f3' ? 'visible' : 'hidden' }} />
                                     <div className={styles.JuesaiName}>反方三辩</div>
                                 </div>
                             </div>

@@ -657,11 +657,9 @@ export default class List extends Component<any, any>  {
                   value={this.state.topicZ}
                   insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>正方辩题</span>}
                   placeholder='请填写'
-                  readonly={this.state.check}
                   onChange={(e, v) => this.onInputChange(v)} />
 
                 <Input className={styles.topicF} id='topicF'
-                  readonly={this.state.check}
                   insetLabel={<span style={{ marginLeft: 5, color: "var(--semi-color-text-2)" }}>反方辩题</span>}
                   placeholder='请填写'
                   value={this.state.topicF}
