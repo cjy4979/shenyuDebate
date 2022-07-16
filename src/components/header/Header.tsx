@@ -99,6 +99,7 @@ export default class Header extends Component<any, any> {
                                     color: 'var(--semi-color-text-2)',
                                     marginRight: '12px',
                                 }}
+                                //onClick={() => history.push("/help")}
                             />
                             <Avatar color={this.state.rights === '1' ? 'pink' : this.state.rights === '0' ? 'light-green' : 'light-blue'} size="small">
                                 {this.state.rights === '1' ? '管理' : this.state.rights === '0' ? '媒体' : '项目'}

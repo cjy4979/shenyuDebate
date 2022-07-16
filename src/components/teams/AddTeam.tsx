@@ -98,10 +98,10 @@ export default class AddTeam extends Component<any, any> {
                 member8: sheet.C21 ? sheet.C21.v : '', //成员8
                 debate8: sheet.J21 ? sheet.J21.v : '',
                 theme8: sheet.N21 ? sheet.N21.v : '',
-                topic1: sheet.D23 ? sheet.D23.v : '', //辩题1
-                explanation1: sheet.D24 ? sheet.D24.v : '',
-                topic2: sheet.D25 ? sheet.D25.v : '', //辩题2
-                explanation2: sheet.D26 ? sheet.D26.v : '',
+                // topic1: sheet.D23 ? sheet.D23.v : '', //辩题1
+                // explanation1: sheet.D24 ? sheet.D24.v : '',
+                // topic2: sheet.D25 ? sheet.D25.v : '', //辩题2
+                // explanation2: sheet.D26 ? sheet.D26.v : '',
                 status: false
             }
             this.setState(data)
