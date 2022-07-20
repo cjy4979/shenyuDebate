@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Layout, Table, Tag, Space, DatePicker } from 'antd';
 import { ColumnProps } from 'antd/es/table';
+import { history } from 'umi';
 import moment from 'moment';
 import styles from './Statistics.less'
 import onlineLogo from '@/images/online.png'
@@ -8,6 +9,16 @@ import onlineLogo from '@/images/online.png'
 const { Content, Footer } = Layout;
 
 export default function index() {
+
+    function isMobile() {
+        if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+            history.push('/m-back');//跳转
+            return true; // 移动端
+            
+        } else {
+            return false; // PC端 
+        }
+    }
 
     const [dataSourse, setDataSourse] = useState([])
     const [currentPage, setCurrentPge] = useState(1)
@@ -32,7 +43,7 @@ export default function index() {
     ]
 
     const loadData = (page: number) => {
-        setCurrentPge(page - 1)
+        setCurrentPge(page)
     }
 
     //useEffect能实时更新，但是会一直向服务器发送请求，antd也会有频闪动画，但是先用着吧

@@ -2,38 +2,33 @@ import React, { useEffect, useState } from 'react'
 import List from '@/components/schedule/List'
 import Header from '@/components/header/Header';
 import './index.css'
-import { Typography,  Nav, Toast } from '@douyinfe/semi-ui';
+import { Typography, Nav, Toast } from '@douyinfe/semi-ui';
 import Icon, { IconPlusCircle } from '@douyinfe/semi-icons';
-import {Pagination} from'antd'
-import { getCookie} from '@/utils/auth';
+import { Pagination } from 'antd'
+import { getCookie } from '@/utils/auth';
 import { history } from 'umi'
 
 
 export default function index() {
     const { Title } = Typography;
     const [listData, setListData] = useState([])
-    const [type, setType] = useState(['预赛'])
-    const [page,setPge]=useState(1)
-    const [total,setTotal]=useState()
-    
+    const [type, setType] = useState(['初赛'])
+    const [page, setPge] = useState(1)
+    const [total, setTotal] = useState()
+
 
 
     useEffect(() => {
-        if(getCookie('rights') === '0'){
-            Toast.warning('无权限')
-            history.push('./statistics')
-        }else{
-            setPge(1)
-            fetch('/api/schedule?type=' + type+'&page='+page+'&size=4').then(
-                response => response.json()
-            ).then(
-                data => {
-                    setListData(data.data)
-                    setTotal(data.total['COUNT(*)']);
-                }
-            )
-        }
-       
+        setPge(1)
+        fetch('/api/schedule?type=' + type + '&page=' + page + '&size=4').then(
+            response => response.json()
+        ).then(
+            data => {
+                setListData(data.data)
+                setTotal(data.total['COUNT(*)']);
+            }
+        )
+
     },
         []
     )
@@ -44,7 +39,7 @@ export default function index() {
     const onClickType = (data: any) => {
         setType([data.itemKey])
         setPge(1)
-        fetch('/api/schedule?type=' + data.itemKey+'&page=1&size=4').then(
+        fetch('/api/schedule?type=' + data.itemKey + '&page=1&size=4').then(
             response => response.json()
         ).then(
             data => {
@@ -54,10 +49,10 @@ export default function index() {
         )
     }
 
-    const onChange =(e:number) =>{
+    const onChange = (e: number) => {
         setPge(e)
 
-        fetch('/api/schedule?type=' + type+'&page='+e+'&size=4').then(
+        fetch('/api/schedule?type=' + type + '&page=' + e + '&size=4').then(
             response => response.json()
         ).then(
             data => {
@@ -76,7 +71,7 @@ export default function index() {
                     <Nav
                         bodyStyle={{ height: '100%' }}
                         items={[
-                            { itemKey: '预赛', text: '预赛', icon: <Icon svg={<YusaiIcon />} size="large" /> },
+                            // { itemKey: '预赛', text: '预赛', icon: <Icon svg={<YusaiIcon />} size="large" /> },
                             { itemKey: '初赛', text: '初赛', icon: <Icon svg={<ChusaiIcon />} size="large" /> },
                             { itemKey: '复赛', text: '复赛', icon: <Icon svg={<FusaiIcon />} size="large" /> },
                             { itemKey: '半决', text: '半决赛', icon: <Icon svg={<BanjueIcon />} size="large" /> },
@@ -96,7 +91,7 @@ export default function index() {
                             return <List key={item['id']} {...item} />
                         })}
                     </div>
-                    <Pagination total={total} pageSize={4} current={page} onChange={(e)=>onChange(e)} style={{ marginTop: '5%' }} hideOnSinglePage></Pagination>
+                    <Pagination total={total} pageSize={4} current={page} onChange={(e) => onChange(e)} style={{ marginTop: '5%' }} hideOnSinglePage></Pagination>
                 </div>
             </div>
 

@@ -44,7 +44,6 @@ export default class Header extends Component<any, any> {
                         </Nav.Header>
 
                         <Nav.Item itemKey="Schedule" text="赛程"
-                            style={this.state.rights === '0' ? { display: 'none' } : {}}
                             icon={<IconCalendarClock size="large" />}
                             onClick={() => {
                                 this.setState({ selectedKeys: ['Schedule'] })

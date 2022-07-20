@@ -23,6 +23,7 @@ export default defineConfig({
     { path: '/personnel', component: '@/pages/personnel/index',title:'深语10.0 对阵',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/work', component: '@/pages/work/index',title:'深语10.0 人员安排',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/statistics', component: '@/pages/statistics/index',title:'深语10.0 赛果',wrappers: ['@/pages/wrappers/auth.tsx']},
+    { path: '/m-back', component: '@/pages/backmobile/Mobile',title:'深语10.0 赛果',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/back', component: '@/pages/BackDetail/index',title:'深语10.0 赛果单(备用)',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/vj/questionnaire', component: '@/pages/results/questionnaire/index', title: "赛果收集" },
     { path: '/vj/success', component: '@/pages/results/success/success.tsx', title: "提交成功" },

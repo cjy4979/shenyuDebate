@@ -172,22 +172,22 @@ export default function index() {
                 icon: <IconUserAdd />
               }, {
                 itemKey: '0',
-                text: '未筛选',
+                text: '未筛选('+unListData.length+')',
                 items: unListData,
                 icon: <Icon svg={<UnhandleIcon />} />
               }, {
                 itemKey: '1',
-                text: '通过(' + passedListData.length + '/32)',
+                text: '通过(' + passedListData.length + '/16)',
                 items: passedListData,
                 icon: <Icon svg={<PassIcon />} />
               }, {
                 itemKey: '2',
-                text: '落选',
+                text: '落选('+deniedListData.length +')',
                 items: deniedListData,
                 icon: <Icon svg={<DenyIcon />} />
               }, {
                 itemKey: '3',
-                text: '待定',
+                text: '待定('+holdListData+')',
                 items: holdListData,
                 icon: <Icon svg={<HoldIcon />} />
               },

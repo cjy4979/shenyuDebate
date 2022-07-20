@@ -12,13 +12,13 @@ import { history } from 'umi'
 export default function index() {
     const { Title } = Typography;
     const [listData, setListData] = useState([])
-    const [type, setType] = useState(['预赛'])
+    const [type, setType] = useState(['初赛'])
     const [page,setPge]=useState(1)
     const [total,setTotal]=useState()
     useEffect(() => {
         if (getCookie('rights') === '0') {
             Toast.warning('无权限')
-            history.push('./statistics')
+            history.push('/statistics')
           } else {
         setPge(1)
         fetch('/api/schedule?type=' + type+'&page='+page+'&size=8').then(
@@ -69,7 +69,7 @@ export default function index() {
                     <Nav
                         bodyStyle={{ height: '100%' }}
                         items={[
-                            { itemKey: '预赛', text: '预赛', icon:<Icon svg={<YusaiIcon />}size="large" /> },
+                           // { itemKey: '预赛', text: '预赛', icon:<Icon svg={<YusaiIcon />}size="large" /> },
                             { itemKey: '初赛', text: '初赛', icon:<Icon svg={<ChusaiIcon />}size="large" /> },
                             { itemKey: '复赛', text: '复赛', icon:<Icon svg={<FusaiIcon />}size="large" /> },
                             { itemKey: '半决', text: '半决赛', icon:<Icon svg={<BanjueIcon />}size="large" /> },

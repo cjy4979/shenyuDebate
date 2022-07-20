@@ -80,34 +80,41 @@ export default class ShowTeam extends Component<any, any> {
             { value: 'A2', label: 'A2' },
             { value: 'A3', label: 'A3' },
             { value: 'A4', label: 'A4' },
-            { value: 'A5', label: 'A5' },
-            { value: 'A6', label: 'A6' },
-            { value: 'A7', label: 'A7' },
-            { value: 'A8', label: 'A8' },
+
+            // { value: 'A5', label: 'A5' },
+            // { value: 'A6', label: 'A6' },
+            // { value: 'A7', label: 'A7' },
+            // { value: 'A8', label: 'A8' },
+
             { value: 'B1', label: 'B1' },
             { value: 'B2', label: 'B2' },
             { value: 'B3', label: 'B3' },
             { value: 'B4', label: 'B4' },
-            { value: 'B5', label: 'B5' },
-            { value: 'B6', label: 'B6' },
-            { value: 'B7', label: 'B7' },
-            { value: 'B8', label: 'B8' },
+
+            // { value: 'B5', label: 'B5' },
+            // { value: 'B6', label: 'B6' },
+            // { value: 'B7', label: 'B7' },
+            // { value: 'B8', label: 'B8' },
+
             { value: 'C1', label: 'C1' },
             { value: 'C2', label: 'C2' },
             { value: 'C3', label: 'C3' },
             { value: 'C4', label: 'C4' },
-            { value: 'C5', label: 'C5' },
-            { value: 'C6', label: 'C6' },
-            { value: 'C7', label: 'C7' },
-            { value: 'C8', label: 'C8' },
+
+            // { value: 'C5', label: 'C5' },
+            // { value: 'C6', label: 'C6' },
+            // { value: 'C7', label: 'C7' },
+            // { value: 'C8', label: 'C8' },
+
             { value: 'D1', label: 'D1' },
             { value: 'D2', label: 'D2' },
             { value: 'D3', label: 'D3' },
             { value: 'D4', label: 'D4' },
-            { value: 'D5', label: 'D5' },
-            { value: 'D6', label: 'D6' },
-            { value: 'D7', label: 'D7' },
-            { value: 'D8', label: 'D8' },
+
+            // { value: 'D5', label: 'D5' },
+            // { value: 'D6', label: 'D6' },
+            // { value: 'D7', label: 'D7' },
+            // { value: 'D8', label: 'D8' },
         ];
 
         return (
@@ -175,6 +182,9 @@ export default class ShowTeam extends Component<any, any> {
                                         <th className={styles.name}>
                                             姓名
                                         </th>
+                                        <th className={styles.school}>
+                                            学校
+                                        </th>
                                         <th className={styles.debate}>
                                             辩论履历
                                         </th>
@@ -191,6 +201,11 @@ export default class ShowTeam extends Component<any, any> {
                                         <td >
                                             <div style={this.props.debate1 === '3-5条' ? { color: 'red' } : { color: '' }}>
                                                 {this.props.member1}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school1}
                                             </div>
                                         </td>
                                         <td>
@@ -217,6 +232,11 @@ export default class ShowTeam extends Component<any, any> {
                                         </td>
                                         <td>
                                             <div style={{ width: '90%' }}>
+                                                {this.props.school2}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style={{ width: '90%' }}>
                                                 {this.props.debate2}
                                             </div>
                                         </td>
@@ -235,6 +255,11 @@ export default class ShowTeam extends Component<any, any> {
                                         </td>
                                         <td>
                                             {this.props.member3}
+                                        </td>
+                                        <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school3}
+                                            </div>
                                         </td>
                                         <td>
                                             <div style={{ width: '90%' }}>
@@ -259,6 +284,11 @@ export default class ShowTeam extends Component<any, any> {
                                                 {this.props.member4}
                                             </td>
                                             <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school4}
+                                            </div>
+                                        </td>
+                                            <td>
                                                 <div style={{ width: '90%' }}>
                                                     {this.props.debate4}
                                                 </div>
@@ -281,6 +311,11 @@ export default class ShowTeam extends Component<any, any> {
                                             <td>
                                                 {this.props.member5}
                                             </td>
+                                            <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school5}
+                                            </div>
+                                        </td>
                                             <td>
                                                 <div style={{ width: '90%' }}>
                                                     {this.props.debate5}
@@ -305,6 +340,11 @@ export default class ShowTeam extends Component<any, any> {
                                                 {this.props.member6}
                                             </td>
                                             <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school6}
+                                            </div>
+                                        </td>
+                                            <td>
                                                 <div style={{ width: '90%' }}>
                                                     {this.props.debate6}
                                                 </div>
@@ -328,6 +368,11 @@ export default class ShowTeam extends Component<any, any> {
                                                 {this.props.member7}
                                             </td>
                                             <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school7}
+                                            </div>
+                                        </td>
+                                            <td>
                                                 <div style={{ width: '90%' }}>
                                                     {this.props.debate7}
                                                 </div>
@@ -350,6 +395,11 @@ export default class ShowTeam extends Component<any, any> {
                                             <td>
                                                 {this.props.member8}
                                             </td>
+                                            <td>
+                                            <div style={{ width: '90%' }}>
+                                                {this.props.school8}
+                                            </div>
+                                        </td>
                                             <td>
                                                 <div style={{ width: '90%' }}>
                                                     {this.props.debate8}

@@ -1,8 +1,6 @@
-import React, { Component, useCallback, useEffect, useState } from 'react'
+import React, { Component} from 'react'
 import styles from './AddTeam.less'
-import { Upload, DatePicker, Button, Switch, Input, Toast } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
-import { history } from 'umi'
+import { Toast } from '@douyinfe/semi-ui';
 import * as XLSX from 'xlsx';
 
 
@@ -18,27 +16,35 @@ export default class AddTeam extends Component<any, any> {
         member1: '', //成员1
         debate1: '',
         theme1: '',
+        school1: '',
         member2: '', //成员2
         debate2: '',
         theme2: '',
+        school2: '',
         member3: '', //成员3
         debate3: '',
         theme3: '',
+        school3: '',
         member4: '', //成员4
         debate4: '',
         theme4: '',
+        school4: '',
         member5: '', //成员5
         debate5: '',
         theme5: '',
+        school5: '',
         member6: '', //成员6
         debate6: '',
         theme6: '',
+        school6: '',
         member7: '', //成员7
         debate7: '',
         theme7: '',
+        school7: '',
         member8: '', //成员8
         debate8: '',
         theme8: '',
+        school8: '',
         topic1: '', //辩题1
         explanation1: '',
         topic2: '', //辩题2
@@ -77,27 +83,35 @@ export default class AddTeam extends Component<any, any> {
                 member1: sheet.C14 ? sheet.C14.v : '', //成员1
                 debate1: sheet.J14 ? sheet.J14.v : '',
                 theme1: sheet.N14 ? sheet.N14.v : '',
+                school1: sheet.G14 ? sheet.G14.v : '',
                 member2: sheet.C15 ? sheet.C15.v : '', //成员2
                 debate2: sheet.J15 ? sheet.J15.v : '',
                 theme2: sheet.N15 ? sheet.N15.v : '',
+                school2: sheet.G15 ? sheet.G15.v : '',
                 member3: sheet.C16 ? sheet.C16.v : '', //成员3
                 debate3: sheet.J16 ? sheet.J16.v : '',
                 theme3: sheet.N16 ? sheet.N16.v : '',
+                school3: sheet.G16 ? sheet.G16.v : '',
                 member4: sheet.C17 ? sheet.C17.v : '', //成员4
                 debate4: sheet.J17 ? sheet.J17.v : '',
                 theme4: sheet.N17 ? sheet.N17.v : '',
+                school4: sheet.G17 ? sheet.G17.v : '',
                 member5: sheet.C18 ? sheet.C18.v : '', //成员5
                 debate5: sheet.J18 ? sheet.J18.v : '',
                 theme5: sheet.N18 ? sheet.N18.v : '',
+                school5: sheet.G18 ? sheet.G18.v : '',
                 member6: sheet.C19 ? sheet.C19.v : '', //成员6
                 debate6: sheet.J19 ? sheet.J19.v : '',
                 theme6: sheet.N19 ? sheet.N19.v : '',
+                school6: sheet.G19 ? sheet.G19.v : '',
                 member7: sheet.C20 ? sheet.C20.v : '', //成员7
                 debate7: sheet.J20 ? sheet.J20.v : '',
                 theme7: sheet.N20 ? sheet.N20.v : '',
+                school7: sheet.G20 ? sheet.G20.v : '',
                 member8: sheet.C21 ? sheet.C21.v : '', //成员8
                 debate8: sheet.J21 ? sheet.J21.v : '',
                 theme8: sheet.N21 ? sheet.N21.v : '',
+                school8: sheet.G21 ? sheet.G21.v : '',
                 // topic1: sheet.D23 ? sheet.D23.v : '', //辩题1
                 // explanation1: sheet.D24 ? sheet.D24.v : '',
                 // topic2: sheet.D25 ? sheet.D25.v : '', //辩题2
@@ -255,7 +269,7 @@ export default class AddTeam extends Component<any, any> {
                             </h1>
 
                             <div className={styles.leaderRow}>
-                                <div style={{ minWidth: '50px',marginLeft:'20px ' }}>
+                                <div style={{ minWidth: '50px', marginLeft: '20px ' }}>
                                     领队:
                                 </div>
                                 <input id='leader'
@@ -287,6 +301,9 @@ export default class AddTeam extends Component<any, any> {
                                             <th className={styles.name}>
                                                 姓名
                                             </th>
+                                            <th className={styles.school}>
+                                                学校
+                                            </th>
                                             <th className={styles.debate}>
                                                 辩论履历
                                             </th>
@@ -303,6 +320,11 @@ export default class AddTeam extends Component<any, any> {
                                             <td>
                                                 <div style={this.state.debate1 === '3-5条' ? { color: 'red' } : { color: '' }}>
                                                     {this.state.debate1 === '3-5条' ? '请检查表格' : this.state.member1}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div style={{ width: '90%' }}>
+                                                    {this.state.school1}
                                                 </div>
                                             </td>
                                             <td>
@@ -329,6 +351,11 @@ export default class AddTeam extends Component<any, any> {
                                             </td>
                                             <td>
                                                 <div style={{ width: '90%' }}>
+                                                    {this.state.school2}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div style={{ width: '90%' }}>
                                                     {this.state.debate2}
                                                 </div>
                                             </td>
@@ -347,6 +374,11 @@ export default class AddTeam extends Component<any, any> {
                                             </td>
                                             <td>
                                                 {this.state.member3}
+                                            </td>
+                                            <td>
+                                                <div style={{ width: '90%' }}>
+                                                    {this.state.school3}
+                                                </div>
                                             </td>
                                             <td>
                                                 <div style={{ width: '90%' }}>
@@ -369,6 +401,11 @@ export default class AddTeam extends Component<any, any> {
                                                 </td>
                                                 <td>
                                                     {this.state.member4}
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '90%' }}>
+                                                        {this.state.school4}
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div style={{ width: '90%' }}>
@@ -395,6 +432,11 @@ export default class AddTeam extends Component<any, any> {
                                                 </td>
                                                 <td>
                                                     <div style={{ width: '90%' }}>
+                                                        {this.state.school5}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '90%' }}>
                                                         {this.state.debate5}
                                                     </div>
                                                 </td>
@@ -415,6 +457,11 @@ export default class AddTeam extends Component<any, any> {
                                                 </td>
                                                 <td>
                                                     {this.state.member6}
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '90%' }}>
+                                                        {this.state.school6}
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div style={{ width: '90%' }}>
@@ -441,6 +488,11 @@ export default class AddTeam extends Component<any, any> {
                                                 </td>
                                                 <td>
                                                     <div style={{ width: '90%' }}>
+                                                        {this.state.school7}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '90%' }}>
                                                         {this.state.debate7}
                                                     </div>
                                                 </td>
@@ -461,6 +513,11 @@ export default class AddTeam extends Component<any, any> {
                                                 </td>
                                                 <td>
                                                     {this.state.member8}
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '90%' }}>
+                                                        {this.state.school8}
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div style={{ width: '90%' }}>
