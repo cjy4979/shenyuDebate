@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Nav, Button, Avatar, Toast, Icon } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Avatar, Toast, Icon, Dropdown, Tag } from '@douyinfe/semi-ui';
 import { IconSemiLogo, IconHelpCircle, IconUserGroup, IconHistogram, IconCalendarClock, IconUserSetting, IconFile, IconExit } from '@douyinfe/semi-icons';
 import { history } from 'umi'
 import { getCookie, removeCookie } from '@/utils/auth';
@@ -9,7 +9,8 @@ import { getCookie, removeCookie } from '@/utils/auth';
 export default class Header extends Component<any, any> {
     state = {
         selectedKeys: this.props.selectedKeys,
-        rights: getCookie('rights')
+        rights: getCookie('rights'),
+        num: this.props.num
     }
 
     //登出
@@ -19,7 +20,6 @@ export default class Header extends Component<any, any> {
             response => response.json()
         ).then(
             data => {
-                console.log(data);
                 if (data.status === 0) {
                     Toast.success('退出成功')
                     history.push('/login')
@@ -33,14 +33,17 @@ export default class Header extends Component<any, any> {
         )
     }
 
+
     render() {
         const { Header } = Layout;
         return (
-            <Header style={{ backgroundColor: 'var(--semi-color-bg-1)',width:'100%' }}>
+            <Header style={{ backgroundColor: 'var(--semi-color-bg-1)', width: '100%' }}>
                 <div>
                     <Nav mode="horizontal" selectedKeys={this.state.selectedKeys}>
                         <Nav.Header>
-                            <Icon svg={<PetIcon />} />
+                            <Icon svg={<PetIcon />} 
+                            //onClick={() => history.push("/try")}
+                            />
                         </Nav.Header>
 
                         <Nav.Item itemKey="Schedule" text="赛程"
@@ -91,15 +94,15 @@ export default class Header extends Component<any, any> {
                                 }}
                                 onClick={() => this.onLogout()}
                             />
-                            <Button
+                            {/* <Button
                                 theme="borderless"
                                 icon={<IconHelpCircle size="large" />}
                                 style={{
                                     color: 'var(--semi-color-text-2)',
                                     marginRight: '12px',
                                 }}
-                                //onClick={() => history.push("/help")}
-                            />
+                            //onClick={() => history.push("/help")}
+                            /> */}
                             <Avatar color={this.state.rights === '1' ? 'pink' : this.state.rights === '0' ? 'light-green' : 'light-blue'} size="small">
                                 {this.state.rights === '1' ? '管理' : this.state.rights === '0' ? '媒体' : '项目'}
                             </Avatar>

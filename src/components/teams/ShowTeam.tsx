@@ -7,7 +7,7 @@ export default class ShowTeam extends Component<any, any> {
 
     state = {
         selected: Number(this.props.selected),
-        type: this.props.type
+        type: this.props.type,
     }
     Delete = () => {
         var msg = confirm('确认删除吗？')
@@ -75,46 +75,61 @@ export default class ShowTeam extends Component<any, any> {
 
     //本组件纯展示，不做数据处理
     render() {
-        const list = [
+        const t16 = [
             { value: 'A1', label: 'A1' },
             { value: 'A2', label: 'A2' },
             { value: 'A3', label: 'A3' },
             { value: 'A4', label: 'A4' },
-
-            // { value: 'A5', label: 'A5' },
-            // { value: 'A6', label: 'A6' },
-            // { value: 'A7', label: 'A7' },
-            // { value: 'A8', label: 'A8' },
 
             { value: 'B1', label: 'B1' },
             { value: 'B2', label: 'B2' },
             { value: 'B3', label: 'B3' },
             { value: 'B4', label: 'B4' },
 
-            // { value: 'B5', label: 'B5' },
-            // { value: 'B6', label: 'B6' },
-            // { value: 'B7', label: 'B7' },
-            // { value: 'B8', label: 'B8' },
 
             { value: 'C1', label: 'C1' },
             { value: 'C2', label: 'C2' },
             { value: 'C3', label: 'C3' },
             { value: 'C4', label: 'C4' },
 
-            // { value: 'C5', label: 'C5' },
-            // { value: 'C6', label: 'C6' },
-            // { value: 'C7', label: 'C7' },
-            // { value: 'C8', label: 'C8' },
 
             { value: 'D1', label: 'D1' },
             { value: 'D2', label: 'D2' },
             { value: 'D3', label: 'D3' },
             { value: 'D4', label: 'D4' },
 
-            // { value: 'D5', label: 'D5' },
-            // { value: 'D6', label: 'D6' },
-            // { value: 'D7', label: 'D7' },
-            // { value: 'D8', label: 'D8' },
+        ];
+
+        const t24 = [
+            { value: 'A1', label: 'A1' },
+            { value: 'A2', label: 'A2' },
+            { value: 'A3', label: 'A3' },
+            { value: 'A4', label: 'A4' },
+
+            { value: 'A5', label: 'A5' },
+            { value: 'A6', label: 'A6' },
+            { value: 'A7', label: 'A7' },
+            { value: 'A8', label: 'A8' },
+
+            { value: 'B1', label: 'B1' },
+            { value: 'B2', label: 'B2' },
+            { value: 'B3', label: 'B3' },
+            { value: 'B4', label: 'B4' },
+
+            { value: 'B5', label: 'B5' },
+            { value: 'B6', label: 'B6' },
+            { value: 'B7', label: 'B7' },
+            { value: 'B8', label: 'B8' },
+
+            { value: 'C1', label: 'C1' },
+            { value: 'C2', label: 'C2' },
+            { value: 'C3', label: 'C3' },
+            { value: 'C4', label: 'C4' },
+
+            { value: 'C5', label: 'C5' },
+            { value: 'C6', label: 'C6' },
+            { value: 'C7', label: 'C7' },
+            { value: 'C8', label: 'C8' },
         ];
 
         return (
@@ -126,7 +141,7 @@ export default class ShowTeam extends Component<any, any> {
                                 <Select placeholder='请选择队伍编号'
                                     style={{ width: 100 }}
                                     value={this.props.type}
-                                    optionList={list}
+                                    optionList={t24}
                                     onChange={(e) => this.onCodeChange(e)}
                                 >
 

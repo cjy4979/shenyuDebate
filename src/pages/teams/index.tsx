@@ -17,6 +17,7 @@ export default function index() {
   const [key, setKey] = useState('add')
   const [openKey, setOpenKey] = useState(['', '', '', ''])
 
+
   useEffect(() => {
     //未筛选的队伍
     if (getCookie('rights') !== '1') {
@@ -124,6 +125,8 @@ export default function index() {
         setHoldListData(leftList)
       }
     )
+
+   
   }
 
   const onClick = (data: any) => {
@@ -164,28 +167,33 @@ export default function index() {
         <div className={styles.left_list}>
 
           <Nav
-            bodyStyle={{ height: '100%' }}
+            bodyStyle={{ height:'100%' }}
             items={[
               {
                 itemKey: 'add',
                 text: '添加队伍',
                 icon: <IconUserAdd />
-              }, {
+              }, 
+              {
                 itemKey: '0',
                 text: '未筛选('+unListData.length+')',
                 items: unListData,
                 icon: <Icon svg={<UnhandleIcon />} />
-              }, {
+              }, 
+              {
                 itemKey: '1',
-                text: '通过(' + passedListData.length + '/16)',
+                text: '通过(' + passedListData.length + '/24)',
                 items: passedListData,
-                icon: <Icon svg={<PassIcon />} />
-              }, {
+                icon: <Icon svg={<PassIcon />} />,
+                maxHeight:'100%'
+              }, 
+              {
                 itemKey: '2',
                 text: '落选('+deniedListData.length +')',
                 items: deniedListData,
                 icon: <Icon svg={<DenyIcon />} />
-              }, {
+              }, 
+              {
                 itemKey: '3',
                 text: '待定('+holdListData+')',
                 items: holdListData,
@@ -203,7 +211,7 @@ export default function index() {
         <div className={styles.right_content}>
           {key === 'add' ?
             <AddTeam /> :
-            <ShowTeam {...teamData} />
+            <ShowTeam {...teamData}/>
           }
         </div>
       </div>

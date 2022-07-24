@@ -17,6 +17,7 @@ export default defineConfig({
   routes: [
     { path: '/', component: '@/pages/index',title:'深语10.0 萌宠主题辩论赛'},
     { path: '/help', component: '@/pages/help',title:'深语系统使用指南'},
+    { path: '/try', component: '@/pages/try',title:'深语系统赛果单体验'},
     { path: '/login', component: '@/pages/Login/Login.tsx',title:'登录'},
     { path: '/schedule', component: '@/pages/schedule/index',title:'深语10.0 赛程安排',wrappers: ['@/pages/wrappers/auth.tsx']},
     { path: '/team', component: '@/pages/teams/index',title:'深语10.0 队伍筛选',wrappers: ['@/pages/wrappers/auth.tsx']},
