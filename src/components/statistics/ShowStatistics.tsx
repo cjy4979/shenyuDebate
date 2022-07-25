@@ -32,7 +32,7 @@ export default class ShowStatistics extends Component<any, any> {
         f1: this.props.f1,
         f2: this.props.f2,
         f3: this.props.f3,
-
+        type:this.props.type,
         schedule: this.props.schedule,
 
         rights: getCookie('rights')
@@ -132,7 +132,7 @@ export default class ShowStatistics extends Component<any, any> {
                 {/* {rate === '' ? '' : */}
                 <div className={styles.content}
                     style={this.state.schedule.substr(0, 2) === '决赛' ? { backgroundColor: '	#FAFAD2' } :
-                        this.state.schedule.substr(0, 2) === '半决' ? { backgroundColor: '#FFF0F5' } :
+                        this.state.type === '半决' ? { backgroundColor: '#FFF0F5' } :
                             { backgroundColor: color[this.state.schedule.substr(3, 1) as keyof typeof color] }}
                 >
                     <div className={styles.row}>

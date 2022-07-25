@@ -13,13 +13,13 @@ export default function Mobile() {
     useEffect(() => {
         fetch('/api/backdate?page=' + currentPage + '&size=10', {
             credentials: 'same-origin',
-        }
-        ).then(response => response.json())
+        }).then(response => response.json())
             .then(data => {
                 setDataSourse(data.data)
                 setTotal(data.total)
             })
     });
+
     const loadData = (page: number) => {
         setCurrentPage(page)
     }

@@ -46,12 +46,15 @@ export default function index() {
         setCurrentPge(page)
     }
 
+    useEffect(()=>{
+        isMobile()
+    },
+    []
+    )
+
     //useEffect能实时更新，但是会一直向服务器发送请求，antd也会有频闪动画，但是先用着吧
     useEffect(() => {
-        fetch('/api/backdate?page=' + currentPage + '&size=10', {
-            credentials: 'same-origin',
-        }
-        ).then(response => response.json())
+        fetch('/api/backdate?page=' + currentPage + '&size=10').then(response => response.json())
             .then(data => {
                 setDataSourse(data.data)
                 setTotal(data.total)

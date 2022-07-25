@@ -32,14 +32,13 @@ export default class Header extends Component<any, any> {
             }
         )
     }
-
+    
 
     render() {
         const { Header } = Layout;
         return (
             <Header style={{ backgroundColor: 'var(--semi-color-bg-1)', width: '100%' }}>
-                <div>
-                    <Nav mode="horizontal" selectedKeys={this.state.selectedKeys}>
+                    <Nav mode="horizontal" selectedKeys={this.state.selectedKeys} style={{overflow:'auto'}}>
                         <Nav.Header>
                             <Icon svg={<PetIcon />} 
                             //onClick={() => history.push("/try")}
@@ -94,21 +93,21 @@ export default class Header extends Component<any, any> {
                                 }}
                                 onClick={() => this.onLogout()}
                             />
-                            {/* <Button
+                            <Button
                                 theme="borderless"
                                 icon={<IconHelpCircle size="large" />}
                                 style={{
                                     color: 'var(--semi-color-text-2)',
                                     marginRight: '12px',
                                 }}
-                            //onClick={() => history.push("/help")}
-                            /> */}
+                            onClick={() => history.push("/try")}
+                            />
                             <Avatar color={this.state.rights === '1' ? 'pink' : this.state.rights === '0' ? 'light-green' : 'light-blue'} size="small">
                                 {this.state.rights === '1' ? '管理' : this.state.rights === '0' ? '媒体' : '项目'}
                             </Avatar>
                         </Nav.Footer>
                     </Nav>
-                </div>
+
             </Header>
         )
     }

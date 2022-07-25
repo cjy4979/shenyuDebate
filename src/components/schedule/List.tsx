@@ -237,7 +237,9 @@ export default class List extends Component<any, any>  {
   //计时码生成
   buildCode = () => {
     this.setState({ urlOpen: !this.state.urlOpen })
-    var url0 = "https://new.bianlun.online/#/show?rid=9&nub=false&useb=true&off=false&ringBellTime=30&isDisplayTitle=true&custom=true&water=false&colorCode=%23e0ffff%7C%23ffffff%7C%2328769b%7C%23ffffff%7C%23ffffff%7C%23BF2727%7C%23007A9C" +
+    // var url0 = "https://new.bianlun.online/#/show?rid=9&nub=false&useb=true&off=false&ringBellTime=30&isDisplayTitle=true&custom=true&water=false&colorCode=%23e0ffff%7C%23ffffff%7C%2328769b%7C%23ffffff%7C%23ffffff%7C%23BF2727%7C%23007A9C" +
+    // 全黑
+    var url0 = "https://new.bianlun.online/#/show?rid=9&nub=false&useb=true&off=false&ringBellTime=30&isDisplayTitle=true&custom=true&water=false&color=true&colorCode=%23000000%7C%23000000%7C%23000000%7C%23000000%7C%23000000%7C%23000000%7C%23000000" +
       "&n0=" + encodeURI(this.state.z) +
       "&n1=" + encodeURI(this.state.f) +
       "&t0=" + encodeURI(this.state.topicZ) +
