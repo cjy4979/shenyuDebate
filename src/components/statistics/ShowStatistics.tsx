@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './showStatistics.less'
 import moment from 'moment';
-import { Space, Col, Row, Divider, Typography, Tag } from '@douyinfe/semi-ui';
+import { Space, Col, Row, Divider, Typography, Tag, Button } from '@douyinfe/semi-ui';
 const { Text, Title, Paragraph } = Typography;
 import { getCookie } from '@/utils/auth';
 //rights:权限：1为超级管理员，有全部权限，2为项目部成员，不能访问赛事列表和队伍筛选，0为新媒体，只能访问赛果单
@@ -32,12 +32,126 @@ export default class ShowStatistics extends Component<any, any> {
         f1: this.props.f1,
         f2: this.props.f2,
         f3: this.props.f3,
-        type:this.props.type,
+        type: this.props.type,
         schedule: this.props.schedule,
 
-        rights: getCookie('rights')
+        rights: getCookie('rights'),
+        pic:false
 
     }
+
+    //生成图片
+    Go = () => {
+        var shenyu = document.querySelector("#shenyu");
+        var ctx = shenyu.getContext('2d');
+        if(shenyu.width != 1080){
+            shenyu.width = 1080;
+            shenyu.height = 546
+        }
+        ctx.clearRect(0, 0, shenyu.width, shenyu.height);
+        
+        var getPixelRatio = function (ctx: any) {
+            var backingStore = ctx.backingStorePixelRatio ||
+                ctx.webkitBackingStorePixelRatio ||
+                ctx.mozBackingStorePixelRatio ||
+                ctx.msBackingStorePixelRatio ||
+                ctx.oBackingStorePixelRatio ||
+                ctx.backingStorePixelRatio || 1;
+            return (window.devicePixelRatio || 1) / backingStore;
+        };
+        var ratio = getPixelRatio(ctx);
+
+        shenyu.style.width = shenyu.width + 'px';
+        shenyu.style.height = shenyu.height + 'px';
+
+        shenyu.width = shenyu.width * ratio;
+        shenyu.height = shenyu.height * ratio;
+
+        var schedule = ''
+        if (this.props.type !== '决赛'){
+            schedule = this.props.type
+        }else{
+            schedule = this.props.schedule.replace(',','-')
+        }
+        var title = this.props.topic
+        var n0 = this.props.z.substr(2) + '  VS  ' + this.props.f.substr(2)
+
+        ctx.rect(0, 0, shenyu.width, shenyu.height);
+        ctx.fillStyle = "#2F547E";
+        ctx.fill();
+
+        ctx.scale(ratio, ratio)
+        var text = "深语主题网辩赛 | 第十届·萌宠"
+        var textWidth = ctx.measureText(text).width;
+        ctx.font = "50px 方正超粗黑简体"
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        ctx.fillText(text, 540, 100)
+
+        var textWidth = ctx.measureText(schedule).width;
+        ctx.font = " 50px 方正超粗黑简体"
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        ctx.fillText(schedule, 540, 240)
+
+
+        var textWidth = ctx.measureText(title).width;
+        ctx.font = "34px 方正超粗黑简体"
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        ctx.fillText(title, 540, 354)
+
+        var textWidth = ctx.measureText(n0).width;
+        ctx.font = "32px 方正超粗黑简体"
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        ctx.fillText(n0, 540, 480)
+
+        //图片导出为 png 格式
+        var type = 'png';
+        var imgData = shenyu.toDataURL(type);
+
+        /**
+         * 获取mimeType
+         * @param  {String} type the old mime-type
+         * @return the new mime-type
+         */
+        var _fixType = function (type) {
+            type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+            var r = type.match(/png|jpeg|bmp|gif/)[0];
+            return 'image/' + r;
+        };
+
+        // 加工image data，替换mime type
+        imgData = imgData.replace(_fixType(type), 'image/octet-stream');
+
+        /**
+         * 在本地进行文件保存
+         * @param  {String} data     要保存到本地的图片数据
+         * @param  {String} filename 文件名
+         */
+        var saveFile = function (data, filename) {
+            var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+            save_link.href = data;
+            save_link.download = filename;
+
+            var event = document.createEvent('MouseEvents');
+            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            save_link.dispatchEvent(event);
+        };
+
+        if (n0 == null){
+            var n0= "空"
+        }
+        // 下载后的文件名
+        var filename = schedule + "-" +n0 +"."+ type;
+        // download
+        saveFile(imgData, filename);
+        this.setState({
+            pic:true
+        })
+    }
+
 
     render() {
         //背景色
@@ -87,9 +201,9 @@ export default class ShowStatistics extends Component<any, any> {
                 return count
             }
             var zheng = getEleNums(win1)
-            if (win1.length<8){
-                rate='投票未完成'
-            }else{
+            if (win1.length < 8) {
+                rate = '投票未完成'
+            } else {
                 var fan = 9 - zheng
                 rate = '正方 ' + zheng + ':' + fan + ' 反方'
                 win = zheng > fan ? '正方 ' + this.state.z : '反方 ' + this.state.f
@@ -122,9 +236,6 @@ export default class ShowStatistics extends Component<any, any> {
             '环节票：' + this.state.judge1 + '评委投给' + win1[1] + '方；' + this.state.judge2 + '评委投给' + win2[1] + '方；' + this.state.judge3 + '评委投给' + win3[1] + '方；\n' +
             '决胜票：' + this.state.judge1 + '评委投给' + win1[2] + '方；' + this.state.judge2 + '评委投给' + win2[2] + '方；' + this.state.judge3 + '评委投给' + win3[2] + '方；\n' +
             '综合评委评票结果，正方比反方为' + rate + '，' + win + '获胜，恭喜。同时也让我们感谢' + defeat + '队的精彩表现。'
-
-
-
 
         return (
             <div className={styles.main} style={rate === '' ? { display: 'none' } : {}}>
@@ -370,6 +481,15 @@ export default class ShowStatistics extends Component<any, any> {
                             {best}
                         </div>
                     </div>
+
+
+                    <div className={styles.row} style={this.state.rights !== '0' ? { display: 'none' } : {}}>
+                        <Button type="secondary" disabled={this.state.pic}
+                            onClick={() => this.Go()}
+                        >生成片头图片</Button>
+                    </div>
+                    <canvas id="shenyu" width="1080" height="546" style={{ margin: "auto", display:'none' }}>
+                    </canvas>
                 </div>
                 {/* } */}
             </div>

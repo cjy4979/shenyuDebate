@@ -20,7 +20,7 @@ export default function index() {
                 }
             )
     },
-    //[]
+    []
     //弃用，改为实时更新
     )
 
