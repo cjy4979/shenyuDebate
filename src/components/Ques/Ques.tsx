@@ -30,9 +30,11 @@ export default class Ques extends Component {
             message.error("请投出环节票")
         } else if (this.state.JueSheng === '') {
             message.error("请投出决胜票")
-        } else if (debater === '') {
-            message.error("请选择最佳辩手归属")
-        } else {
+        }
+        // else if (debater === '') {
+        //     message.error("请选择最佳辩手归属")
+        // } 
+        else {
             //备用库提交
             fetch('/api/backsubmit?name=' + this.state.name +
                 '&win=' + this.state.NeiRong + '@' + this.state.HuanJie + '@' + this.state.JueSheng +

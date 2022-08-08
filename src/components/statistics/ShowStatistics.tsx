@@ -36,7 +36,7 @@ export default class ShowStatistics extends Component<any, any> {
         schedule: this.props.schedule,
 
         rights: getCookie('rights'),
-        pic:false
+        pic: false
 
     }
 
@@ -44,12 +44,12 @@ export default class ShowStatistics extends Component<any, any> {
     Go = () => {
         var shenyu = document.querySelector("#shenyu");
         var ctx = shenyu.getContext('2d');
-        if(shenyu.width != 1080){
+        if (shenyu.width != 1080) {
             shenyu.width = 1080;
             shenyu.height = 546
         }
         ctx.clearRect(0, 0, shenyu.width, shenyu.height);
-        
+
         var getPixelRatio = function (ctx: any) {
             var backingStore = ctx.backingStorePixelRatio ||
                 ctx.webkitBackingStorePixelRatio ||
@@ -68,10 +68,10 @@ export default class ShowStatistics extends Component<any, any> {
         shenyu.height = shenyu.height * ratio;
 
         var schedule = ''
-        if (this.props.type !== '决赛'){
+        if (this.props.type !== '决赛') {
             schedule = this.props.type
-        }else{
-            schedule = this.props.schedule.replace(',','-')
+        } else {
+            schedule = this.props.schedule.replace(',', '-')
         }
         var title = this.props.topic
         var n0 = this.props.z.substr(2) + '  VS  ' + this.props.f.substr(2)
@@ -140,15 +140,15 @@ export default class ShowStatistics extends Component<any, any> {
             save_link.dispatchEvent(event);
         };
 
-        if (n0 == null){
-            var n0= "空"
+        if (n0 == null) {
+            var n0 = "空"
         }
         // 下载后的文件名
-        var filename = schedule + "-" +n0 +"."+ type;
+        var filename = schedule + "-" + n0 + "." + type;
         // download
         saveFile(imgData, filename);
         this.setState({
-            pic:true
+            pic: true
         })
     }
 
@@ -216,7 +216,7 @@ export default class ShowStatistics extends Component<any, any> {
 
         //佳辩
         var best = ''
-        if (this.state.j1best === '' || this.state.j2best === '' || this.state.j3best === '') {
+        if (this.state.j1best === '' && this.state.j2best === '' && this.state.j3best === '') {
             best = ''
         } else if (this.state.j1best === this.state.j2best || this.state.j1best === this.state.j3best) {
             best = this.state[this.state.j1best as keyof typeof bestDebater] === null ? bestDebater[this.state.j1best as keyof typeof bestDebater] : bestDebater[this.state.j1best as keyof typeof bestDebater] + ' ' + this.state[this.state.j1best as keyof typeof bestDebater]
@@ -356,9 +356,13 @@ export default class ShowStatistics extends Component<any, any> {
                                     </span>
                                     :
                                     <div className={styles.bestdebater}>
-                                        <Tag color={this.state.j1best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
-                                            {bestDebater[this.state.j1best as keyof typeof bestDebater]}
-                                        </Tag>
+                                        {this.state.j1best === '' ? <Tag color={'pink'}>弃票</Tag> :
+                                            <Tag color={this.state.j1best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
+                                                {bestDebater[this.state.j1best as keyof typeof bestDebater]}
+                                            </Tag>
+
+                                        }
+
                                     </div>
                             }
                         </div>
@@ -400,9 +404,11 @@ export default class ShowStatistics extends Component<any, any> {
                                         <Tag color='red'>尚未进行投票</Tag>
                                     </span> :
                                     <div className={styles.bestdebater}>
-                                        <Tag color={this.state.j2best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
-                                            {bestDebater[this.state.j2best as keyof typeof bestDebater]}
-                                        </Tag>
+                                        {this.state.j2best === '' ? <Tag color={'pink'}>弃票</Tag> :
+                                            <Tag color={this.state.j2best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
+                                                {bestDebater[this.state.j2best as keyof typeof bestDebater]}
+                                            </Tag>
+                                        }
                                     </div>
                             }
                         </div>
@@ -442,9 +448,11 @@ export default class ShowStatistics extends Component<any, any> {
                                         <Tag color='red'>尚未进行投票</Tag>
                                     </span> :
                                     <div className={styles.bestdebater}>
-                                        <Tag color={this.state.j3best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
-                                            {bestDebater[this.state.j3best as keyof typeof bestDebater]}
-                                        </Tag>
+                                        {this.state.j3best === '' ? <Tag color={'pink'}>弃票</Tag> :
+                                            <Tag color={this.state.j3best.substr(0, 1) === 'z' ? 'teal' : 'blue'} type='ghost'>
+                                                {bestDebater[this.state.j3best as keyof typeof bestDebater]}
+                                            </Tag>
+                                        }
                                     </div>
                             }
                         </div>
@@ -488,7 +496,7 @@ export default class ShowStatistics extends Component<any, any> {
                             onClick={() => this.Go()}
                         >生成片头图片</Button>
                     </div>
-                    <canvas id="shenyu" width="1080" height="546" style={{ margin: "auto", display:'none' }}>
+                    <canvas id="shenyu" width="1080" height="546" style={{ margin: "auto", display: 'none' }}>
                     </canvas>
                 </div>
                 {/* } */}

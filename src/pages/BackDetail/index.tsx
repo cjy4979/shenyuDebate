@@ -120,6 +120,10 @@ export default function index() {
         render: best => {
             let FinalDebater = bestDebater[best as keyof typeof bestDebater];
             return (
+                best === '' ?
+                <div style={{ color: '#ff4d4f', fontSize: '18px' }}>
+                    弃票
+                </div>:
                 <div style={best.substr(0, 1) === 'z' ? { color: '#00b483', fontSize: '18px' } : { color: '#7991d1', fontSize: '18px' }}>
                     {FinalDebater}
                 </div>

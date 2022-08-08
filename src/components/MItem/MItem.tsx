@@ -67,9 +67,11 @@ export default class MItem extends Component<any, any> {
                     </div>
                     {/* 佳辩 */}
                     <div className={styles.cell} >
-                        <div style={best.substr(0, 1) === 'z' ? { color: '#00b483', fontSize: '18px' } : { color: '#7991d1', fontSize: '18px' }}>
-                            {bestDebater[best as keyof typeof bestDebater]}
-                        </div>
+                        {best === '' ? <div style={{ color: '#ff4d4f', fontSize: '18px' }}> 弃票</div> :
+                            <div style={best.substr(0, 1) === 'z' ? { color: '#00b483', fontSize: '18px' } : { color: '#7991d1', fontSize: '18px' }}>
+                                {bestDebater[best as keyof typeof bestDebater]}
+                            </div>}
+
 
                     </div>
                 </div>
